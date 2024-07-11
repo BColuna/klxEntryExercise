@@ -1,24 +1,24 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
-Given("I open the website", () => {
-  cy.visit("https://example.com"); // Replace with your website URL
+Given("User opens the website", () => {
+  cy.visit("https://www.saucedemo.com/");
 });
 
 When(
-  "I enter my username {string} and password {string}",
+  "User enters username {string} and password {string}",
   (username, password) => {
-    cy.get('input[name="username"]').type(username);
+    cy.get("#user-name").type(username);
 
-    cy.get('input[name="password"]').type(password);
+    cy.get("#password").type(password);
   }
 );
 
-And("I click the login button", () => {
-  cy.get('button[type="submit"]').click();
+And("User clicks the login button", () => {
+  cy.get("#login-button").click();
 });
 
-Then("I should be logged in", () => {
-  cy.url().should("eq", "https://example.com/dashboard"); // Replace with the expected URL after successful login
+Then("User should be logged in", () => {
+  cy.url().should("eq", "https://www.saucedemo.com/inventory.html");
 
-  cy.contains("Welcome, User!").should("be.visible"); // Replace with an element or text on the dashboard page
+  cy.get("#inventory_container").should("be.visible");
 });
